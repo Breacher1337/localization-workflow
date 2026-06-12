@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.tox/
+docs/_build/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Application/Proprietary Data (Explicitly ignored just in case)
+data/
+core/
+plugins/
+temp_test/
+test_extracted/
+jars/
+libs/
+build/
+decompiled/
+decompiled_core/
+
+# OS generated files
+.DS_Store
+Thumbs.db

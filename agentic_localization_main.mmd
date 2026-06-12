@@ -1,0 +1,135 @@
+flowchart TD
+    classDef source fill:#1a1a2e,stroke:#4a5568,color:#e2e8f0,stroke-width:2px
+    classDef prevent fill:#1b4332,stroke:#2d6a4f,color:#d8f3dc,stroke-width:2px
+    classDef translate fill:#1d3557,stroke:#457b9d,color:#a8dadc,stroke-width:2px
+    classDef detect fill:#5c2d73,stroke:#9b59b6,color:#e8daef,stroke-width:2px
+    classDef correct fill:#78290f,stroke:#ff7b00,color:#ffddd2,stroke-width:2px
+    classDef gate fill:#d4a017,stroke:#f1c40f,color:#1a1a2e,stroke-width:3px
+    classDef output fill:#0b3d0b,stroke:#2ecc71,color:#d5f5e3,stroke-width:3px
+    classDef human fill:#c0392b,stroke:#e74c3c,color:#fadbd8,stroke-width:2px
+
+    %% ═══════════════════════════════════════
+    %% PHASE 0: GLOSSARY GOVERNANCE
+    %% ═══════════════════════════════════════
+    subgraph P0["🛡️ PHASE 0 · GLOSSARY GOVERNANCE"]
+        direction TB
+        G_RAW["Glossary Draft\n(Human + AI Candidates)"]:::source
+        G_VALIDATE{"Glossary Validator Agent\n━━━━━━━━━━━\n• Cross-ref source application files\n• Flag ambiguous terms\n• Detect duplicate mappings\n• Verify contextual fit"}:::prevent
+        G_HUMAN["👤 Human Arbiter\nApproves / Rejects / Edits\nEach Entry"]:::human
+        G_LOCKED[("🔒 Locked Glossary\n(Versioned, Immutable\nUntil Next Review Cycle)")]:::prevent
+
+        G_RAW --> G_VALIDATE
+        G_VALIDATE -->|"Candidates + Flags"| G_HUMAN
+        G_HUMAN -->|"Approved Entries"| G_LOCKED
+        G_HUMAN -.->|"Rejected → Re-draft"| G_RAW
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 1: SOURCE EXTRACTION
+    %% ═══════════════════════════════════════
+    subgraph P1["📦 PHASE 1 · SOURCE EXTRACTION"]
+        direction TB
+        SRC_RAW["Raw Application Files\nCSVs, JSONs, JARs, Java"]:::source
+        SRC_EXTRACT["Extraction Engine\n━━━━━━━━━━━\n• Separate translatable text\n• Preserve logic columns\n• Tag content types\n(UI / Lore / Procedural)"]:::translate
+        SRC_CHUNKS["Tagged Source Chunks\n{type, file, column, row_id}"]:::translate
+
+        SRC_RAW --> SRC_EXTRACT
+        SRC_EXTRACT --> SRC_CHUNKS
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 2: PRE-FLIGHT VALIDATION
+    %% ═══════════════════════════════════════
+    subgraph P2["🚦 PHASE 2 · PRE-FLIGHT GATE"]
+        direction TB
+        PF_CHECK{"Pre-Flight Validator\n━━━━━━━━━━━\n• All glossary terms present?\n• Content type routing correct?\n• Chunk sizes within limits?\n• No structural anomalies?"}:::gate
+        PF_PASS["✅ Cleared for Translation"]:::prevent
+        PF_FAIL["❌ Blocked\nRoute to human for triage"]:::correct
+
+        PF_CHECK -->|"Pass"| PF_PASS
+        PF_CHECK -->|"Fail"| PF_FAIL
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 3: TRANSLATION
+    %% ═══════════════════════════════════════
+    subgraph P3["🌐 PHASE 3 · AGENTIC TRANSLATION"]
+        direction TB
+        TR_AGENT{"Translator Subagents\n━━━━━━━━━━━\n• Receive locked glossary\n• Receive tagged chunks\n• Context-aware prompts\nper content type"}:::translate
+        TR_OUTPUT["Raw Translated Chunks"]:::translate
+
+        TR_AGENT --> TR_OUTPUT
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 4: CRITIC LOOP
+    %% ═══════════════════════════════════════
+    subgraph P4["🔍 PHASE 4 · CRITIC LOOP"]
+        direction TB
+        CR_AGENT{"Critic Agent\n━━━━━━━━━━━\n• Glossary compliance check\n• Naturalness scoring\n• Placeholder integrity\n• Context consistency\n• Character limit check"}:::detect
+        CR_PASS["✅ Approved Chunks"]:::detect
+        CR_REJECT["⚠️ Rejected Chunks\n+ Specific Error Report"]:::correct
+
+        CR_AGENT -->|"Score ≥ Threshold"| CR_PASS
+        CR_AGENT -->|"Score < Threshold"| CR_REJECT
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 5: ASSEMBLY & SANITIZATION
+    %% ═══════════════════════════════════════
+    subgraph P5["🔧 PHASE 5 · ASSEMBLY"]
+        direction TB
+        MERGE["Merge Engine\n━━━━━━━━━━━\n• Reconstruct target files\n• Restore data structure"]:::translate
+        SANITIZE{"Deterministic Sanitizer\n━━━━━━━━━━━\n• Regex domain-specific sweep\n• Duplicate key detection\n• Encoding validation\n(BOM, newlines)"}:::correct
+        ASSEMBLED["Sanitized Output Files"]:::correct
+
+        MERGE --> SANITIZE
+        SANITIZE --> ASSEMBLED
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 6: HUMAN REVIEW & FEEDBACK
+    %% ═══════════════════════════════════════
+    subgraph P6["👁️ PHASE 6 · HUMAN REVIEW"]
+        direction TB
+        SAMPLE["Sample-Based Review\n━━━━━━━━━━━\n• Random 5-10% spot check\n• High-risk content: 100%\n• UI context verification"]:::human
+        APPROVE["✅ Approved for Release"]:::output
+        CORRECTIONS["📝 Corrections Log\n(What was wrong + why)"]:::correct
+
+        SAMPLE -->|"Accept"| APPROVE
+        SAMPLE -->|"Corrections"| CORRECTIONS
+    end
+
+    %% ═══════════════════════════════════════
+    %% PHASE 7: ENGINE VALIDATION
+    %% ═══════════════════════════════════════
+    subgraph P7["⚙️ PHASE 7 · ENGINE VALIDATION"]
+        direction TB
+        ENGINE{"Engine Protocol Check\n━━━━━━━━━━━\n• No BOM\n• Correct newline semantics\n• No duplicate composite keys\n• Logic columns untouched"}:::gate
+        READY((("🚀 Production\nReady Output"))):::output
+        ENGINE_FAIL["❌ Protocol Violation\nAuto-fix or block"]:::correct
+
+        ENGINE -->|"Pass"| READY
+        ENGINE -->|"Fail"| ENGINE_FAIL
+    end
+
+    %% ═══════════════════════════════════════
+    %% CONNECTIONS (forward flow)
+    %% ═══════════════════════════════════════
+    G_LOCKED -->|"Glossary v1.x"| PF_CHECK
+    SRC_CHUNKS --> PF_CHECK
+    PF_PASS --> TR_AGENT
+    G_LOCKED -.->|"Strict Reference"| TR_AGENT
+    TR_OUTPUT --> CR_AGENT
+    G_LOCKED -.->|"Compliance Baseline"| CR_AGENT
+    CR_PASS --> MERGE
+    ASSEMBLED --> SAMPLE
+    APPROVE --> ENGINE
+
+    %% ═══════════════════════════════════════
+    %% BACKWARD LOOPS (error correction)
+    %% ═══════════════════════════════════════
+    CR_REJECT -->|"🔄 Retry with\nerror context"| TR_AGENT
+    ENGINE_FAIL -->|"🔄 Re-sanitize"| SANITIZE
+    CORRECTIONS -->|"🔄 Update Rules"| G_LOCKED
+    PF_FAIL -->|"🔄 Fix & Resubmit"| SRC_EXTRACT

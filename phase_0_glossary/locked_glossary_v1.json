@@ -1,0 +1,2399 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "locked_by": "human_arbiter",
+    "locked_at": "2026-06-10T22:18:11.856754+00:00",
+    "source": "localization_tracking/master_glossary.csv",
+    "entry_count": 199
+  },
+  "entries": [
+    {
+      "term_en": "Chicomoztoc",
+      "translations": [
+        {
+          "ja": "チコモズトック",
+          "context": "Map/Planet",
+          "pos": "noun",
+          "nuance": "A harsh, industrial Hegemony capital. Maintained phonetic Katakana, but for Map images, we will render Chicomoztoc as a faded drop-shadow behind the Japanese text for a sci-fi aesthetic.",
+          "status": "Example"
+        }
+      ]
+    },
+    {
+      "term_en": "Luddic Path",
+      "translations": [
+        {
+          "ja": "ルッディック・パス",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Kept as phonetic, but for dialogue referencing 'Pathers', we will use 'パスの狂信者' (Fanatics of the Path) to convey their terrifying zealotry.",
+          "status": "Example"
+        }
+      ]
+    },
+    {
+      "term_en": "Alpha Core",
+      "translations": [
+        {
+          "ja": "アルファ・コア",
+          "context": "Item",
+          "pos": "noun",
+          "nuance": "In-application, AI is highly illegal and feared. We will ensure dialogue referencing them sounds adequately terrifying and taboo (e.g., using '禁忌のAI' in descriptive lore).",
+          "status": "Example"
+        }
+      ]
+    },
+    {
+      "term_en": "Engage",
+      "translations": [
+        {
+          "ja": "交戦開始",
+          "context": "UI/Combat",
+          "pos": "noun",
+          "nuance": "Instead of a generic '戦う' (Fight), '交戦開始' (Commence Engagement) sounds more like a proper tactical fleet command.",
+          "status": "Example"
+        }
+      ]
+    },
+    {
+      "term_en": "Sierra",
+      "translations": [
+        {
+          "ja": "シエラ",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "Extremely flavorful and emotional AI from Secrets of the Frontier. Her dialogue will use specific emotive speech patterns unlike standard robotic AI cores.",
+          "status": "Example"
+        }
+      ]
+    },
+    {
+      "term_en": "Starsystemlocations",
+      "translations": [
+        {
+          "ja": "星系の場所",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Askonia",
+      "translations": [
+        {
+          "ja": "アスコニア",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Algebbar",
+      "translations": [
+        {
+          "ja": "アルゲバール",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Arcadia",
+      "translations": [
+        {
+          "ja": "アルカディア",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Aztlan",
+      "translations": [
+        {
+          "ja": "アズトラン",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Canaan",
+      "translations": [
+        {
+          "ja": "カナン",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Corvus",
+      "translations": [
+        {
+          "ja": "コルヴス",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Duzahk",
+      "translations": [
+        {
+          "ja": "ドゥザーク",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Eos",
+      "translations": [
+        {
+          "ja": "イオス",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Galatia",
+      "translations": [
+        {
+          "ja": "ガラテア",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Hybrasil",
+      "translations": [
+        {
+          "ja": "ハイブラジル",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Isirah",
+      "translations": [
+        {
+          "ja": "イシラ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Kumarikandam",
+      "translations": [
+        {
+          "ja": "クマリカンダム",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Magec",
+      "translations": [
+        {
+          "ja": "マゲク",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Mayasura",
+      "translations": [
+        {
+          "ja": "マヤスラ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Naraka",
+      "translations": [
+        {
+          "ja": "ナラカ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Penelope",
+      "translations": [
+        {
+          "ja": "ペネロペ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Samarra",
+      "translations": [
+        {
+          "ja": "サマラ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Thule",
+      "translations": [
+        {
+          "ja": "トゥーレ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Tia",
+      "translations": [
+        {
+          "ja": "ティア",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Tyle",
+      "translations": [
+        {
+          "ja": "タイル",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Valhalla",
+      "translations": [
+        {
+          "ja": "ヴァルハラ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Westernesse",
+      "translations": [
+        {
+          "ja": "ウェスタネッセ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Yma",
+      "translations": [
+        {
+          "ja": "ユマ",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Zagan",
+      "translations": [
+        {
+          "ja": "ザガン",
+          "context": "Map/System",
+          "pos": "noun",
+          "nuance": "Star system name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Derelict",
+      "translations": [
+        {
+          "ja": "デレリクト",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Shrouded Dweller",
+      "translations": [
+        {
+          "ja": "覆われた住人",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Hegemony",
+      "translations": [
+        {
+          "ja": "ヘゲモニー",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "High Hegemon",
+      "translations": [
+        {
+          "ja": "ハイヘゲモン",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Commander",
+      "translations": [
+        {
+          "ja": "指揮官",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Patrol Commander",
+      "translations": [
+        {
+          "ja": "パトロールコマンダー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Fleet Commander",
+      "translations": [
+        {
+          "ja": "艦隊司令官",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Base Commander",
+      "translations": [
+        {
+          "ja": "基地司令官",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Military Governor",
+      "translations": [
+        {
+          "ja": "軍事総督",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "independent",
+      "translations": [
+        {
+          "ja": "独立勢力",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Knights of Ludd",
+      "translations": [
+        {
+          "ja": "ルッド騎士団",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Lion's Guard",
+      "translations": [
+        {
+          "ja": "ライオンの衛兵",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Church of Galactic Redemption",
+      "translations": [
+        {
+          "ja": "ルッディック教会",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Deacon-Captain",
+      "translations": [
+        {
+          "ja": "執事長",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Curate-Commander",
+      "translations": [
+        {
+          "ja": "キュレート・コマンダー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Bishop-Governor",
+      "translations": [
+        {
+          "ja": "ビショップ・ガバナー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Sub-presbyter Orbis",
+      "translations": [
+        {
+          "ja": "副司祭オルビス",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Knight-Commander",
+      "translations": [
+        {
+          "ja": "騎士団長",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Portwatcher",
+      "translations": [
+        {
+          "ja": "ポートウォッチャー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Purser",
+      "translations": [
+        {
+          "ja": "パーサー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Blessed Walker",
+      "translations": [
+        {
+          "ja": "祝福されたウォーカー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Supplicant",
+      "translations": [
+        {
+          "ja": "サプリカント",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Hammer",
+      "translations": [
+        {
+          "ja": "ハンマー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Shepherd-militant",
+      "translations": [
+        {
+          "ja": "羊飼いの戦闘員",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Shepherd-metropolitan",
+      "translations": [
+        {
+          "ja": "シェパードメトロポリタン",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "mercenary",
+      "translations": [
+        {
+          "ja": "傭兵",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Neutral",
+      "translations": [
+        {
+          "ja": "ニュートラル",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Omega",
+      "translations": [
+        {
+          "ja": "オメガ",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Persean League",
+      "translations": [
+        {
+          "ja": "ペルセアン同盟",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Navarch",
+      "translations": [
+        {
+          "ja": "ナヴァーチ",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Prime Navarch",
+      "translations": [
+        {
+          "ja": "プライム・ナヴァーチ",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Gens Parriarch",
+      "translations": [
+        {
+          "ja": "市教区長",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Gens Patriarch",
+      "translations": [
+        {
+          "ja": "総主教",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Gens Matriarch",
+      "translations": [
+        {
+          "ja": "氏族女家長",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Demi-Navarch",
+      "translations": [
+        {
+          "ja": "デミ・ナヴァーチ",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Archon",
+      "translations": [
+        {
+          "ja": "アルコン",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Demarchon",
+      "translations": [
+        {
+          "ja": "デマルション",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Prime Demarchon",
+      "translations": [
+        {
+          "ja": "デマルション首相",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "pirates",
+      "translations": [
+        {
+          "ja": "海賊",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Captain",
+      "translations": [
+        {
+          "ja": "キャプテン",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Fleet Master",
+      "translations": [
+        {
+          "ja": "フリートマスター",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Warboss",
+      "translations": [
+        {
+          "ja": "ウォーボス",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Station King",
+      "translations": [
+        {
+          "ja": "ステーションキング",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Portboss",
+      "translations": [
+        {
+          "ja": "ポートボス",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Boss",
+      "translations": [
+        {
+          "ja": "ボス",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Your",
+      "translations": [
+        {
+          "ja": "あなたの",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "refugees",
+      "translations": [
+        {
+          "ja": "難民",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Remnants",
+      "translations": [
+        {
+          "ja": "残骸",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "scavengers",
+      "translations": [
+        {
+          "ja": "スカベンジャー",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Sindrian Diktat",
+      "translations": [
+        {
+          "ja": "シンドリアン・ディクタット",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Supreme Executor",
+      "translations": [
+        {
+          "ja": "最高執行者",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Leader of Executive Guard",
+      "translations": [
+        {
+          "ja": "幹部衛兵のリーダー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Controller-General",
+      "translations": [
+        {
+          "ja": "総監",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "sleeper",
+      "translations": [
+        {
+          "ja": "スリーパー",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Threat",
+      "translations": [
+        {
+          "ja": "脅威",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Tri-Tachyon",
+      "translations": [
+        {
+          "ja": "トライ・タキオン",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Group display name",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Senior Operation Manager",
+      "translations": [
+        {
+          "ja": "シニアオペレーションマネージャー",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Operation Manager",
+      "translations": [
+        {
+          "ja": "運行管理者",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "CEO",
+      "translations": [
+        {
+          "ja": "最高経営責任者（CEO）",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Patrol Director",
+      "translations": [
+        {
+          "ja": "パトロールディレクター",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Fleet Director",
+      "translations": [
+        {
+          "ja": "フリートディレクター",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Base Director",
+      "translations": [
+        {
+          "ja": "拠点ディレクター",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Character rank or post",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Tripad",
+      "translations": [
+        {
+          "ja": "トライパッド",
+          "context": "UI/Lore",
+          "pos": "noun",
+          "nuance": "Common personal datapad in Application",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "ping",
+      "translations": [
+        {
+          "ja": "通知",
+          "context": "UI/Lore",
+          "pos": "noun",
+          "nuance": "Notification or transmission ping",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Corporation (suffix)",
+      "translations": [
+        {
+          "ja": "社",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "Corporate suffix",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Keepfaith",
+      "translations": [
+        {
+          "ja": "キープフェイス",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Coureuse",
+      "translations": [
+        {
+          "ja": "クールーズ",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Fabrique Orbitale",
+      "translations": [
+        {
+          "ja": "ファブリク・オービタール",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Skiron",
+      "translations": [
+        {
+          "ja": "スキロン",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Sebestyen",
+      "translations": [
+        {
+          "ja": "セベスチェン",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Gargoyle",
+      "translations": [
+        {
+          "ja": "ガーゴイル",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Pather",
+      "translations": [
+        {
+          "ja": "パス教徒",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Menes",
+      "translations": [
+        {
+          "ja": "メネス",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Glamour",
+      "translations": [
+        {
+          "ja": "グラマー",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Subcurate",
+      "translations": [
+        {
+          "ja": "副司祭",
+          "context": "Title",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Academy",
+      "translations": [
+        {
+          "ja": "アカデミー",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "Galatia Academy",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Rotanev",
+      "translations": [
+        {
+          "ja": "ロタネフ",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Bornanew",
+      "translations": [
+        {
+          "ja": "ボルナニュー",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Zal",
+      "translations": [
+        {
+          "ja": "ザル",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Janus",
+      "translations": [
+        {
+          "ja": "ヤヌス",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "Janus Device",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Excubitor",
+      "translations": [
+        {
+          "ja": "エクスキュービター",
+          "context": "Ship/Lore",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Orbis",
+      "translations": [
+        {
+          "ja": "オービス",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Comms",
+      "translations": [
+        {
+          "ja": "通信",
+          "context": "UI/Lore",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Artemisia",
+      "translations": [
+        {
+          "ja": "アルテミシア",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Yaribay",
+      "translations": [
+        {
+          "ja": "ヤリベイ",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Daud",
+      "translations": [
+        {
+          "ja": "ダウド",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Diktat",
+      "translations": [
+        {
+          "ja": "ディクタット",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Sindrian Diktat",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Skyarco",
+      "translations": [
+        {
+          "ja": "スカイアルコ",
+          "context": "Location",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Elissa",
+      "translations": [
+        {
+          "ja": "エリッサ",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Jethro",
+      "translations": [
+        {
+          "ja": "ジェスロ",
+          "context": "Character",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Kallichore",
+      "translations": [
+        {
+          "ja": "カリコレ",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Transponder",
+      "translations": [
+        {
+          "ja": "トランスポンダ",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Go Dark",
+      "translations": [
+        {
+          "ja": "隠密航行",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Active Sensor Burst",
+      "translations": [
+        {
+          "ja": "アクティブセンサー走査",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Emergency Burn",
+      "translations": [
+        {
+          "ja": "緊急推進",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Sustained Burn",
+      "translations": [
+        {
+          "ja": "持続的巡航",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Interdiction Pulse",
+      "translations": [
+        {
+          "ja": "航行阻止パルス",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Scavenge",
+      "translations": [
+        {
+          "ja": "残骸探索",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Neutrino Detector",
+      "translations": [
+        {
+          "ja": "ニュートリノ探知機",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Transverse Jump",
+      "translations": [
+        {
+          "ja": "空間断層跳躍",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Remote Survey",
+      "translations": [
+        {
+          "ja": "遠隔探査",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Distress Call",
+      "translations": [
+        {
+          "ja": "救難信号",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Reverse Polarity",
+      "translations": [
+        {
+          "ja": "極性反転",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Generate Slipsurge",
+      "translations": [
+        {
+          "ja": "スリップサージ生成",
+          "context": "Ability",
+          "pos": "noun",
+          "nuance": "Fleet UI Ability",
+          "status": "Manual Update"
+        }
+      ]
+    },
+    {
+      "term_en": "Heavy Industry",
+      "translations": [
+        {
+          "ja": "重工業",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Orbital Works",
+      "translations": [
+        {
+          "ja": "軌道工場",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Fuel Production",
+      "translations": [
+        {
+          "ja": "燃料生産",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Advanced Fuel Production",
+      "translations": [
+        {
+          "ja": "先進燃料生産",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Commerce",
+      "translations": [
+        {
+          "ja": "商業",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Orbital Station",
+      "translations": [
+        {
+          "ja": "軌道ステーション",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Battlestation",
+      "translations": [
+        {
+          "ja": "バトルステーション",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Star Fortress",
+      "translations": [
+        {
+          "ja": "スターフォートレス",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Ground Defenses",
+      "translations": [
+        {
+          "ja": "地上防衛施設",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Heavy Batteries",
+      "translations": [
+        {
+          "ja": "重砲兵装",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Patrol HQ",
+      "translations": [
+        {
+          "ja": "哨戒司令部",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Military Base",
+      "translations": [
+        {
+          "ja": "軍事基地",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "High Command",
+      "translations": [
+        {
+          "ja": "最高司令部",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Lion's Guard HQ",
+      "translations": [
+        {
+          "ja": "ライオンズガード司令部",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Planetary Shield",
+      "translations": [
+        {
+          "ja": "惑星シールド",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Waystation",
+      "translations": [
+        {
+          "ja": "中継ステーション",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Cryosanctum",
+      "translations": [
+        {
+          "ja": "凍結睡眠聖域",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Cryorevival",
+      "translations": [
+        {
+          "ja": "凍結睡眠復活施設",
+          "context": "Industry",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Uninhabitable World",
+      "translations": [
+        {
+          "ja": "居住不能世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Ice World",
+      "translations": [
+        {
+          "ja": "氷雪世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Desert World",
+      "translations": [
+        {
+          "ja": "砂漠世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Arid World",
+      "translations": [
+        {
+          "ja": "乾燥世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Water World",
+      "translations": [
+        {
+          "ja": "水界世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Jungle World",
+      "translations": [
+        {
+          "ja": "ジャングル世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Terran World",
+      "translations": [
+        {
+          "ja": "テラン世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Barren-marginal World",
+      "translations": [
+        {
+          "ja": "不毛の辺境世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Twilight World",
+      "translations": [
+        {
+          "ja": "薄明世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Tundra World",
+      "translations": [
+        {
+          "ja": "ツンドラ世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Cryovolcanic World",
+      "translations": [
+        {
+          "ja": "氷雪火山世界",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Dissident Population",
+      "translations": [
+        {
+          "ja": "反体制派の住民",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Headquarters",
+      "translations": [
+        {
+          "ja": "司令部",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Hydroponics Complex",
+      "translations": [
+        {
+          "ja": "水耕栽培施設",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Food Shortage",
+      "translations": [
+        {
+          "ja": "食糧不足",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Recent Unrest",
+      "translations": [
+        {
+          "ja": "最近の騒乱",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Trade Disruption",
+      "translations": [
+        {
+          "ja": "貿易の混乱",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Smuggling",
+      "translations": [
+        {
+          "ja": "密輸",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "System Bounty",
+      "translations": [
+        {
+          "ja": "星系賞金",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Rogue AI Core",
+      "translations": [
+        {
+          "ja": "ローグAIコア",
+          "context": "Market Condition",
+          "pos": "noun",
+          "nuance": "",
+          "status": "Auto-translated"
+        }
+      ]
+    },
+    {
+      "term_en": "Flux",
+      "translations": [
+        {
+          "ja": "フラックス",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Energy capacity/shield stress",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Ordnance Points",
+      "translations": [
+        {
+          "ja": "兵器ポイント",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Points used to equip weapons and hullplugins",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Hull",
+      "translations": [
+        {
+          "ja": "船体",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "The physical body of a ship",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Armor",
+      "translations": [
+        {
+          "ja": "装甲",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Defensive plating",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "CR (Combat Readiness)",
+      "translations": [
+        {
+          "ja": "戦闘準備(CR)",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "How ready a ship is for battle",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Deployment Points",
+      "translations": [
+        {
+          "ja": "配備ポイント",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Cost to deploy a ship in combat",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Hyperspace",
+      "translations": [
+        {
+          "ja": "超空間(ハイパースペース)",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "Faster-than-light travel dimension",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Jump Point",
+      "translations": [
+        {
+          "ja": "ジャンプポイント",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "Entry/exit points to hyperspace",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Burn Level",
+      "translations": [
+        {
+          "ja": "バーンレベル",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Speed of a fleet in campaign plugine",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "D-Plugin",
+      "translations": [
+        {
+          "ja": "D-PLUGIN",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Degraded/damaged pluginification on a ship",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "S-Plugin",
+      "translations": [
+        {
+          "ja": "S-PLUGIN",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Story pluginification built into a ship",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "PD (Point Defense)",
+      "translations": [
+        {
+          "ja": "PD(近接防衛)",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Anti-missile and anti-fighter weapons",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "EMP",
+      "translations": [
+        {
+          "ja": "EMP",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Electromagnetic pulse damage",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Fighter",
+      "translations": [
+        {
+          "ja": "戦闘機",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Small craft deployed from carriers",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Bomber",
+      "translations": [
+        {
+          "ja": "爆撃機",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Small craft focused on anti-ship payloads",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Interceptor",
+      "translations": [
+        {
+          "ja": "迎撃機",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Small craft focused on anti-fighter roles",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Carrier",
+      "translations": [
+        {
+          "ja": "空母",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Ship dedicated to deploying fighters",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Frigate",
+      "translations": [
+        {
+          "ja": "フリゲート",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Smallest standard ship class",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Destroyer",
+      "translations": [
+        {
+          "ja": "駆逐艦",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Medium-small ship class",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Cruiser",
+      "translations": [
+        {
+          "ja": "巡洋艦",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Medium-large ship class",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Capital",
+      "translations": [
+        {
+          "ja": "主力艦",
+          "context": "Ship Class",
+          "pos": "noun",
+          "nuance": "Largest ship class",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Domain of Man",
+      "translations": [
+        {
+          "ja": "人類領域(ドメイン)",
+          "context": "Lore",
+          "pos": "noun",
+          "nuance": "The fallen human empire",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Luddic Church",
+      "translations": [
+        {
+          "ja": "ルッディック教会",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Religious group",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "AI Core",
+      "translations": [
+        {
+          "ja": "AIコア",
+          "context": "Item",
+          "pos": "noun",
+          "nuance": "Artificial intelligence unit (Alpha/Beta/Gamma)",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Story Point",
+      "translations": [
+        {
+          "ja": "ストーリーポイント",
+          "context": "Applicationplay",
+          "pos": "noun",
+          "nuance": "Special currency for unique choices",
+          "status": "Merged"
+        }
+      ]
+    },
+    {
+      "term_en": "Director of Special Acquisitions",
+      "translations": [
+        {
+          "ja": "特別調達ディレクター",
+          "context": "Rank/Post",
+          "pos": "noun",
+          "nuance": "Tri-Tachyon intelligence rank",
+          "status": "Human-Approved"
+        }
+      ]
+    },
+    {
+      "term_en": "Luddic",
+      "translations": [
+        {
+          "ja": "ルディック",
+          "context": "Group",
+          "pos": "noun",
+          "nuance": "Base term for Luddic variations",
+          "status": "Manual Update"
+        }
+      ]
+    }
+  ]
+}

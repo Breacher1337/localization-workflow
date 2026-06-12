@@ -1,0 +1,25 @@
+/legacy-java-localization-workflow
+├── /core
+│   ├── state.json
+│   ├── orchestrator_agent.md
+│   └── AGENTS.md
+├── /phase_0_glossary
+│   ├── glossary_agent.md
+│   └── locked_glossary_v1.json
+├── /phase_1_extraction
+│   └── extraction_engine.py
+├── /phase_2_preflight
+│   └── preflight_validator.py
+├── /phase_3_translation
+│   ├── translator_subagent_ui.md
+│   └── translator_subagent_dialogue.md
+├── /phase_4_critic
+│   └── critic_agent.md
+├── /phase_5_assembly
+│   ├── merge_engine.py
+│   └── deterministic_sanitizer.py
+├── /phase_6_human_review
+│   └── corrections_log.json
+├── /phase_7_engine_validation
+│   └── protocol_check.py
+└── README.md

@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "description": "Human review corrections log. Each correction feeds back into the glossary governance loop.",
+    "created_at": null,
+    "review_count": 0
+  },
+  "corrections": []
+}
