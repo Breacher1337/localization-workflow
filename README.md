@@ -1,5 +1,8 @@
 # Legacy Java Localization Workflow
 
+[![English](https://img.shields.io/badge/Language-English-blue)](#)
+[![日本語](https://img.shields.io/badge/Language-%E6%97%A5%E6%9C%AC%E8%AA%9E-red)](README.ja.md)
+
 This is a translation project, with the intent of the agentic workflow to expose the localized media to the Japanese audience. Localizing a hardcoded Java application without source access requires more than simple string replacement. This project evolved into an exercise in bytecode manipulation, encoding engineering, and designing AI orchestration pipelines.
 
 This document serves as an engineering narrative detailing the evolution of this architecture—the challenges faced and the systems built to solve them.
