@@ -48,7 +48,7 @@ async def batch_translate(chunks):
     # Filter chunks that actually need translation
     to_translate = []
     for c in chunks:
-        if c.get("translation") and c["translation"] != c["source_text"]:
+        if "translation" in c:
             continue
         to_translate.append(c)
 
