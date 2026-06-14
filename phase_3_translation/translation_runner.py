@@ -2,12 +2,14 @@
 import json
 import os
 import csv
-import urllib.request
-import urllib.parse
 import re
 import time
 import sys
 import io
+import os
+
+# Add the script's directory to sys.path so we can import local pluginules
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Ensure UTF-8 output
 sys.stdout.reconfigure(encoding='utf-8')
@@ -23,46 +25,57 @@ PLACEHOLDER_RE = re.compile(
     r"|\{[a-zA-Z_]\w*\}"
 )
 
-def translate_text(text):
-    if not text.strip():
-        return text
+def mask_glossary(chunk):
+    text = chunk["source_text"]
+    glossary_hits = chunk.get("glossary_hits", [])
+    if not glossary_hits:
+        chunk["masked_text"] = text
+        chunk["placeholders"] = {}
+        return
         
-    delimiter = '\r\n' if '\r\n' in text else ('\n' if '\n' in text else None)
+    sorted_hits = sorted(glossary_hits, key=lambda x: len(x.get("english", "")), reverse=True)
     
-    if delimiter:
-        lines = text.split(delimiter)
-        translated_lines = []
-        for line in lines:
-            if not line.strip():
-                translated_lines.append(line)
-            else:
-                try:
-                    url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ja&dt=t&q=" + urllib.parse.quote(line)
-                    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                    with urllib.request.urlopen(req, timeout=10) as response:
-                        data = json.loads(response.read().decode('utf-8'))
-                        translated_lines.append("".join([part[0] for part in data[0] if part[0]]))
-                except Exception as e:
-                    print(f"  [WARNING] Translation failed for '{line[:20]}': {e}")
-                    translated_lines.append(line)
-        return delimiter.join(translated_lines)
-    else:
-        try:
-            url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ja&dt=t&q=" + urllib.parse.quote(text)
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=10) as response:
-                data = json.loads(response.read().decode('utf-8'))
-                return "".join([part[0] for part in data[0] if part[0]])
-        except Exception as e:
-            print(f"  [WARNING] Translation failed for '{text[:20]}': {e}")
-            return text
+    placeholders = {}
+    masked_text = text
+    
+    for idx, hit in enumerate(sorted_hits):
+        eng = hit.get("english", "").strip()
+        jp = hit.get("japanese", "").strip()
+        if not eng or not jp:
+            continue
+        placeholder = f"__G{idx}__"
+        placeholders[placeholder] = jp
+        
+        pattern = re.compile(re.escape(eng), re.IGNORECASE)
+        masked_text = pattern.sub(placeholder, masked_text)
+        
+    chunk["masked_text"] = masked_text
+    chunk["placeholders"] = placeholders
+    # Override source_text for LLM so it reads the masked text
+    chunk["original_source"] = chunk["source_text"]
+    chunk["source_text"] = masked_text
+
+def unmask_glossary(chunk):
+    translated = chunk.get("translation", "")
+    placeholders = chunk.get("placeholders", {})
+    
+    if isinstance(placeholders, dict):
+        for placeholder, jp_val in placeholders.items():
+            num = placeholder.strip("_G")
+            pattern_str = rf"__\s*[gG]\s*{num}\s*__"
+            translated = re.sub(pattern_str, jp_val, translated)
+            
+    chunk["translation"] = translated
+    # Restore original source_text
+    if "original_source" in chunk:
+        chunk["source_text"] = chunk["original_source"]
+        del chunk["original_source"]
 
 def parse_json_tolerant(path):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
     if content.startswith("\ufeff"):
         content = content[1:]
-    # Remove # comments
     lines = content.split("\n")
     cleaned = []
     for line in lines:
@@ -87,13 +100,10 @@ def parse_json_tolerant(path):
             result.append(ch)
         cleaned.append("".join(result))
     text = "\n".join(cleaned)
-    # Remove trailing commas
     text = re.sub(r",\s*([}\]])", r"\1", text)
-    # Strip trailing commas at end of document
     text = text.strip()
     if text.endswith(','):
         text = text[:-1].strip()
-    # Remove float suffixes
     text = re.sub(r'\b(\d+\.?\d*)f\b', r'\1', text)
     
     try:
@@ -101,7 +111,6 @@ def parse_json_tolerant(path):
     except json.JSONDecodeError:
         pass
         
-    # Quote bare keys
     bare_key_re = re.compile(r'^(\s*)([a-zA-Z_][a-zA-Z0-9_]*)(\s*:\s*)')
     lines = text.split("\n")
     result = []
@@ -121,7 +130,6 @@ def parse_json_tolerant(path):
     return json.loads("\n".join(result))
 
 def load_plugin_translations():
-    # Cache to store translations: (src_file_norm, row_key, column) -> translation
     cache = {}
     if not os.path.exists(PLUGIN_DIR):
         return cache
@@ -139,7 +147,6 @@ def load_plugin_translations():
                 if ext == '.csv':
                     with open(path, 'r', encoding='utf-8') as file:
                         content = file.read()
-                    # Strip BOM
                     if content.startswith("\ufeff"):
                         content = content[1:]
                     reader = csv.reader(io.StringIO(content))
@@ -149,7 +156,6 @@ def load_plugin_translations():
                         
                     rows = list(reader)
                     
-                    # Determine row key mapping
                     if 'name_gen_data.csv' in rel_path:
                         name_idx = header.index('name')
                         tags_idx = header.index('tags') if 'tags' in header else len(header)
@@ -198,33 +204,25 @@ def load_plugin_translations():
                 elif ext in ('.json', '.group'):
                     data = parse_json_tolerant(path)
                     
-                    # Recursively extract flat keys
-                    def extract_flat(obj, current_path=""):
+                    def extract_flat_bracket(obj, current_path=""):
                         if isinstance(obj, dict):
                             for k, v in obj.items():
-                                new_p = f"{current_path}.{k}" if current_path else k
-                                extract_flat(v, new_p)
+                                new_p = f"{current_path}['{k}']" if current_path else f"['{k}']"
+                                extract_flat_bracket(v, new_p)
                         elif isinstance(obj, list):
                             for idx, v in enumerate(obj):
-                                new_p = f"{current_path}.{idx}"
-                                extract_flat(v, new_p)
+                                new_p = f"{current_path}[{idx}]"
+                                extract_flat_bracket(v, new_p)
                         elif isinstance(obj, str):
-                            # The key represents the row_key/column
-                            # For groups, row_key is group_id.json_path, column is json_path
-                            # Let's map both formats
-                            cache[(rel_path, current_path, 'value')] = obj
                             cache[(rel_path, current_path, current_path)] = obj
                             
-                    # For group files, let's extract their specific structures
                     if ext == '.group':
                         fid = data.get('id', os.path.splitext(f)[0])
-                        # displayName etc
                         for key in ["displayName", "displayNameWithArticle", "displayNameLong", 
                                     "displayNameLongWithArticle", "displayNameIsOrAre", 
                                     "personNamePrefix", "personNamePrefixAOrAn"]:
                             if key in data and isinstance(data[key], str):
                                 cache[(rel_path, f"{fid}.{key}", key) ] = data[key]
-                        # ranks
                         ranks = data.get("ranks", {})
                         if isinstance(ranks, dict):
                             for sec in ["ranks", "posts"]:
@@ -234,7 +232,6 @@ def load_plugin_translations():
                                         if isinstance(role_data, dict) and "name" in role_data:
                                             jp = f"ranks.{sec}.{role}.name"
                                             cache[(rel_path, f"{fid}.{jp}", jp)] = role_data["name"]
-                        # fleetTypeNames
                         fleet = data.get("fleetTypeNames", {})
                         if isinstance(fleet, dict):
                             for fk, fv in fleet.items():
@@ -242,7 +239,7 @@ def load_plugin_translations():
                                     jp = f"fleetTypeNames.{fk}"
                                     cache[(rel_path, f"{fid}.{jp}", jp)] = fv
                     else:
-                        extract_flat(data)
+                        extract_flat_bracket(data)
                         
             except Exception as e:
                 print(f"  [WARNING] Failed to load translations from {rel_path}: {e}")
@@ -250,7 +247,7 @@ def load_plugin_translations():
     return cache
 
 def main():
-    print("Phase 3/4 - Translation and Critic Runner")
+    print("Phase 3/4 - Agentic Translation Runner (Gemini Batched)")
     print(f"Reading validated chunks from: {VALIDATED_PATH}")
     
     if not os.path.exists(VALIDATED_PATH):
@@ -265,30 +262,23 @@ def main():
     trans_cache = load_plugin_translations()
     print(f"Loaded {len(trans_cache)} cached translations.")
     
-    approved_chunks = []
-    translated_count = 0
     cached_count = 0
     skipped_proper_nouns = 0
     
-    # Regex to match single variables: e.g., $priceList
     var_re = re.compile(r'^\$[a-zA-Z_]\w*$')
-    # Regex to match option variables: e.g., 100:defaultLeave:$salvageLeaveText
     opt_var_re = re.compile(r'^(\d+:)?[a-zA-Z_]\w*:\$[a-zA-Z_]\w*$')
     
-    print("Processing chunks...")
-    for idx, chunk in enumerate(chunks):
+    # Pre-process chunks: cache checking, skipping, and glossary masking
+    for chunk in chunks:
         src_file = chunk["source_file"]
         row_key = chunk["row_key"]
         col = chunk["column"]
         source_text = chunk["source_text"]
         
-        # Check cache
         cache_key = (src_file, row_key, col)
         translation = trans_cache.get(cache_key)
         
-        # Fallback cache matching for group keys without id prefix
         if not translation and src_file.endswith('.group'):
-            # Try matching just by jsonpath
             short_key = row_key.split('.', 1)[-1] if '.' in row_key else row_key
             translation = trans_cache.get((src_file, short_key, col))
             
@@ -296,11 +286,9 @@ def main():
             chunk["translation"] = translation
             cached_count += 1
         else:
-            # Need translation
             context = chunk.get("context_tag", "")
             s_clean = source_text.strip()
             
-            # Apply strict skipping criteria
             if (context in ("procedural_name", "person_name", "ship_name") or 
                 len(source_text) <= 2 or 
                 source_text.isdigit() or
@@ -312,49 +300,66 @@ def main():
                 chunk["translation"] = source_text
                 skipped_proper_nouns += 1
             else:
-                # Call translation
-                translated = translate_text(source_text)
+                # Mask glossary terms for LLM
+                mask_glossary(chunk)
                 
-                # Simple critic / placeholder restore check
+    # Run batch translation
+    print("Starting batch translation with Gemini...")
+    from llm_client import batch_translate_sync, QuotaExhaustedError
+    
+    batch_size = 20
+    translated_count = 0
+    quota_exhausted = False
+    
+    for i in range(0, len(chunks), batch_size):
+        batch = chunks[i:i+batch_size]
+        print(f"  Processing batch {i//batch_size + 1}/{(len(chunks) + batch_size - 1)//batch_size}...")
+        
+        try:
+            batch = batch_translate_sync(batch)
+        except QuotaExhaustedError as e:
+            print(f"\n[FATAL] {e}")
+            print("Daily API limit reached or extreme rate limiting applied.")
+            print("Saving progress up to this point and gracefully exiting...")
+            quota_exhausted = True
+            break
+            
+        # Post-process this batch immediately
+        for chunk in batch:
+            if "placeholders" in chunk:
+                unmask_glossary(chunk)
+                
+                source_text = chunk["source_text"]
+                translated = chunk["translation"]
+                
                 source_placeholders = set(PLACEHOLDER_RE.findall(source_text))
                 translated_placeholders = set(PLACEHOLDER_RE.findall(translated))
                 
-                # If placeholders were pluginified or lost, restore them to the end of the text
-                # or log warning. (A more robust critic could attempt smart alignment, 
-                # but for simplicity we keep it standard and restore missing ones)
                 missing_placeholders = source_placeholders - translated_placeholders
                 if missing_placeholders:
                     print(f"  [CRITIC WARNING] Placeholders missing in translation of '{source_text[:20]}': {missing_placeholders}")
-                    # Try to restore placeholders to their exact text form if they got translated
-                    # e.g. replacing translated terms with original placeholders
                     for placeholder in missing_placeholders:
-                        # Heuristic: append missing placeholders at the end so they survive validation
                         translated += f" {placeholder}"
                         
                 chunk["translation"] = translated
                 translated_count += 1
                 
-                # Inform progress
-                if translated_count % 50 == 0:
-                    print(f"  Translated {translated_count} new chunks...")
-                    # Sleep to prevent rate limit
-                    time.sleep(1)
-                    
-        approved_chunks.append(chunk)
-        
-    # Write output
-    with open(APPROVED_PATH, "w", encoding="utf-8", newline="") as f:
-        json.dump(approved_chunks, f, ensure_ascii=False, indent=2)
-        
+        # Save incremental progress for all chunks processed so far
+        with open(APPROVED_PATH, "w", encoding="utf-8", newline="") as f:
+            json.dump(chunks, f, ensure_ascii=False, indent=2)
+            
     print("\n" + "=" * 70)
     print("Translation and Critic Summary")
     print("=" * 70)
-    print(f"Total chunks processed: {len(approved_chunks)}")
+    print(f"Total chunks processed: {len(chunks)}")
     print(f"  Loaded from cache:   {cached_count}")
     print(f"  Skipped proper names: {skipped_proper_nouns}")
     print(f"  Newly translated:     {translated_count}")
     print(f"Wrote approved chunks to: {APPROVED_PATH}")
     print("=" * 70)
+    
+    if quota_exhausted:
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()

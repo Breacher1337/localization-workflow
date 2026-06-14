@@ -1,6 +1,3 @@
-import sys
-import os
-import config
 """
 Phase 5: Merge Engine (DETERMINISTIC - NO LLM)
 
@@ -27,8 +24,8 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-PROJECT_ROOT = r"."
-VANILLA_DATA = config.APPLICATION_CORE_DIR
+PROJECT_ROOT = r"E:\lamesa\2026\application-jp"
+VANILLA_DATA = r"C:\Program Files (x86)\Acme Corp\Application\application-core\data"
 PLUGIN_DATA = os.path.join(PROJECT_ROOT, r"plugins\JP_Lang_Pack\data")
 CHUNKS_FILE = os.path.join(PROJECT_ROOT, r"data\chunks\phase4_approved.json")
 STATE_FILE = os.path.join(PROJECT_ROOT, r"core\state.json")
@@ -56,6 +53,7 @@ TRANSLATABLE_COLS = {
     "characters/skills/skill_data.csv":         {"name", "description", "author"},
     "hullplugins/hull_plugins.csv":                   {"name", "desc", "short", "sPluginDesc"},
     "hulls/ship_data.csv":                      {"name", "designation"},
+    "hulls/wing_data.csv":                      {"role desc"},
     "shipsystems/ship_systems.csv":             {"name"},
     "strings/descriptions.csv":                 {"text1", "text2", "text3", "text4", "text5"},
     "weapons/weapon_data.csv":                  {"name", "primaryRoleStr", "customPrimary", "customPrimaryHL", "customAncillary", "customAncillaryHL"},
@@ -100,6 +98,8 @@ def load_chunks(path):
             src = normalize_path(item["source_file"])
             row_key = item["row_key"]
             col = item["column"]
+            if "translation" not in item:
+                continue
             translation = item["translation"]
             chunks[(src, row_key, col)] = translation
     else:
@@ -382,26 +382,50 @@ def parse_json_tolerant(path):
     return json.loads(quoted)
 
 
+def parse_bracket_path(path_str):
+    import re
+    # Matches keys inside quotes or indices: e.g. ['key'] or [0]
+    tokens = re.findall(r"\'([^\']+)\'|(\d+)", path_str)
+    parts = []
+    for t in tokens:
+        if t[0]:
+            parts.append(t[0])
+        else:
+            # Cast list indices to integers so set_nested_value works correctly
+            parts.append(int(t[1]))
+    return parts
+
+
 def merge_json(source_file, row_translations, vanilla_path, output_path):
     """
     Merge translations into a JSON or .group file.
     - Deep copies the vanilla structure
     - Replaces values at specified json_paths
-    - row_key is the json_path (dot-separated)
+    - row_key is the json_path (bracket notation or dot-separated)
     - column is typically 'value' or the specific field name
     """
     data = parse_json_tolerant(vanilla_path)
 
     fields_updated = 0
+    norm = normalize_path(source_file)
+    group_id = os.path.splitext(os.path.basename(source_file))[0]
 
     for json_path, col_translations in row_translations.items():
-        # The json_path is dot-separated: e.g. "names.ships.0"
-        path_parts = json_path.split(".")
+        # Strip group_id prefix for group files (e.g. hegemony.displayName -> displayName)
+        actual_path = json_path
+        if norm.endswith(".group") and actual_path.startswith(group_id + "."):
+            actual_path = actual_path[len(group_id) + 1:]
+
+        # Resolve path parts based on bracket notation vs dot notation
+        if actual_path.startswith("["):
+            path_parts = parse_bracket_path(actual_path)
+        else:
+            path_parts = [int(p) if p.isdigit() else p for p in actual_path.split(".")]
 
         # For JSON chunks, the "column" is typically the field name or "value"
         for col_name, translation in col_translations.items():
-            # If column is "value", replace the value at json_path directly
-            if col_name == "value":
+            # If column name matches the full path, stripped path, or "value"
+            if col_name == json_path or col_name == actual_path or col_name == "value":
                 if set_nested_value(data, path_parts, translation):
                     fields_updated += 1
             else:
