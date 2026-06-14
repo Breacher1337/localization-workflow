@@ -11,8 +11,8 @@ from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_excep
 API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=API_KEY) if API_KEY else None
 
-# Use Gemini 2.5 Flash for all translations as requested
-PLUGINEL_NAME = "gemini-2.5-flash"
+# Use Gemini 3.1 Flash Lite for all translations (15 RPM limit)
+PLUGINEL_NAME = "gemini-3.1-flash-lite"
 RATE_LIMIT_DELAY = 4.5  # Seconds to wait between batches (15 RPM = 4 seconds, so 4.5 is safe)
 
 class QuotaExhaustedError(Exception):
