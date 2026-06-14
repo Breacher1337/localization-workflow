@@ -82,7 +82,16 @@ async def batch_translate(chunks):
         
         # Map back to chunks
         for i, chunk in enumerate(to_translate):
-            translated_text = result_json.get(str(i), chunk["source_text"])
+            val = result_json.get(str(i), chunk["source_text"])
+            if isinstance(val, dict):
+                # Try to extract common keys or stringify
+                translated_text = val.get("translation") or val.get("translated") or val.get("text") or str(val)
+            elif isinstance(val, list):
+                translated_text = " ".join(str(item) for item in val)
+            elif val is None:
+                translated_text = chunk["source_text"]
+            else:
+                translated_text = str(val)
             chunk["translation"] = translated_text
             
     except Exception as e:

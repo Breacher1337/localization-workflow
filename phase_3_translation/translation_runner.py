@@ -57,13 +57,17 @@ def mask_glossary(chunk):
 
 def unmask_glossary(chunk):
     translated = chunk.get("translation", "")
+    if not isinstance(translated, str):
+        translated = str(translated)
+        
     placeholders = chunk.get("placeholders", {})
     
     if isinstance(placeholders, dict):
         for placeholder, jp_val in placeholders.items():
             num = placeholder.strip("_G")
             pattern_str = rf"__\s*[gG]\s*{num}\s*__"
-            translated = re.sub(pattern_str, jp_val, translated)
+            val_str = str(jp_val) if jp_val is not None else ""
+            translated = re.sub(pattern_str, val_str, translated)
             
     chunk["translation"] = translated
     # Restore original source_text
