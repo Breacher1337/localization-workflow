@@ -101,6 +101,44 @@ def load_chunks(path):
             if "translation" not in item:
                 continue
             translation = item["translation"]
+            
+            # Heal dict-like translations (e.g. stringified Python dicts returned by LLM)
+            if isinstance(translation, str):
+                t_clean = translation.strip()
+                if t_clean.startswith("{") and ("translated_text" in t_clean or "translation" in t_clean or "source_text" in t_clean):
+                    last_brace = t_clean.rfind("}")
+                    if last_brace != -1:
+                        t_clean = t_clean[:last_brace+1]
+                    import ast
+                    try:
+                        parsed = ast.literal_eval(t_clean)
+                        if isinstance(parsed, dict):
+                            # Try preferred keys
+                            healed = None
+                            for key in ["translated_text", "translation", "translated"]:
+                                if key in parsed and isinstance(parsed[key], str):
+                                    healed = parsed[key]
+                                    break
+                            
+                            # Try fallback non-ASCII string
+                            if not healed:
+                                for k, v in parsed.items():
+                                    if isinstance(v, str) and any(ord(c) > 127 for c in v):
+                                        healed = v
+                                        break
+                                        
+                            # Try fallback non-metadata string
+                            if not healed:
+                                for k, v in parsed.items():
+                                    if k not in ["context_tag", "chunk_type"] and isinstance(v, str):
+                                        healed = v
+                                        break
+                                        
+                            if healed:
+                                translation = healed
+                    except Exception:
+                        pass
+            
             chunks[(src, row_key, col)] = translation
     else:
         print("ERROR: Unrecognized chunk format in phase4_approved.json")
@@ -222,22 +260,31 @@ def merge_csv(source_file, row_translations, vanilla_path, output_path):
                     continue
 
                 original_text = row[col_idx] if col_idx < len(row) else ""
-                if is_rules and col_name == "options" and "\r\n" in original_text and "\r\n" not in translation:
+                if is_rules and col_name == "options":
                     import re
-                    orig_keys = []
-                    for line in original_text.split("\r\n"):
-                        if ":" in line:
-                            parts = line.split(":")
-                            key = ":".join(parts[:-1]) + ":"
-                            if key.strip():
-                                orig_keys.append(key.strip())
+                    prefix_pattern = re.compile(r"^((?:[0-9]+:)?[a-zA-Z0-9_-]+):")
+                    trans_prefix_pattern = re.compile(r"^((?:[0-9]+:)?[a-zA-Z0-9_\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff-]+):")
                     
-                    fixed_translation = translation
-                    for key in orig_keys:
-                        # Escape regex and make sure we don't replace if it already has \r\n
-                        escaped_key = re.escape(key)
-                        fixed_translation = re.sub(r'(?<!^)(?<!\r\n)(?<!\n)(' + escaped_key + r')', r'\r\n\1', fixed_translation)
-                    translation = fixed_translation.strip()
+                    orig_lines = original_text.replace("\r\n", "\n").split("\n")
+                    trans_lines = translation.replace("\r\n", "\n").split("\n")
+                    
+                    fixed_lines = []
+                    for i, trans_line in enumerate(trans_lines):
+                        trans_line = trans_line.strip()
+                        if i < len(orig_lines):
+                            orig_line = orig_lines[i].strip()
+                            match = prefix_pattern.match(orig_line)
+                            if match:
+                                prefix = match.group(0)
+                                if not trans_line.startswith(prefix):
+                                    trans_match = trans_prefix_pattern.match(trans_line)
+                                    if trans_match:
+                                        trans_line = trans_line[trans_match.end():].strip()
+                                    trans_line = prefix + trans_line
+                        fixed_lines.append(trans_line)
+                    
+                    sep = "\r\n" if "\r\n" in original_text else "\n"
+                    translation = sep.join(fixed_lines)
 
                 # Pad row if needed
                 while len(new_row) <= col_idx:
