@@ -1,12 +1,16 @@
 import json
 import os
 import csv
+import sys
 import time
-# Try to import llm_client, but fallback if API_KEY is missing
+
 try:
+    # Add root dir to sys.path to ensure pluginule resolution
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
     from phase_3_translation.llm_client import batch_translate_sync
     HAS_LLM = True
-except ImportError:
+except Exception as e:
+    print(f"Error importing llm_client: {e}")
     HAS_LLM = False
 
 def translate_templates():
@@ -17,44 +21,51 @@ def translate_templates():
     with open(input_path, "r", encoding="utf-8") as f:
         templates = json.load(f)
 
-    # For this task, if LLM is unavailable or for speed, I will use a simple heuristic
-    # and provide some manual translations for the common ones found.
+    if not HAS_LLM:
+        print("LLM client not available. Cannot perform dynamic translation.")
+        return
 
     translations = []
+    
+    # We will translate in batches of 20
+    batch_size = 20
+    batches = [templates[i:i + batch_size] for i in range(0, len(templates), batch_size)]
 
-    # Manual high-quality translations for frequent patterns
-    manual_map = {
-        "Gained {0} bonus experience": "{0}のボーナス経験値を獲得しました",
-        "Gained {0} experience ({1} bonus XP used)": "{0}の経験値を獲得しました（{1}のボーナスXPを使用）",
-        "Gained {0} experience": "{0}の経験値を獲得しました",
-        "Used {0} {1} {2}": "{0} {1} {2}を使用しました",
-        "Copies of campaign data in memory: {0}": "メモリ内のキャンペーンデータのコピー: {0}",
-    }
-
-    for item in templates:
-        template = item['template']
-        regex = item['regex']
-
-        translated = manual_map.get(template)
-
-        if not translated:
-            # Fallback to a pseudo-translation or simple placeholder preservation
-            # In a real scenario, we'd call the LLM here.
-            # translated = "TRANSLATED: " + template
-            # For now, let's just use the original if we don't have a manual one,
-            # but in the real JULES plugine, I should probably try to translate more.
-
-            # Simple heuristic for some others
-            if template.startswith("Gained "):
-                translated = template.replace("Gained ", "").replace(" experience", "の経験値を獲得しました")
-            else:
-                translated = template # Leave as is if unknown
-
-        translations.append({
-            "original": template,
-            "japanese": translated,
-            "regex": regex
-        })
+    for i, batch in enumerate(batches):
+        print(f"Translating batch {i+1}/{len(batches)}...")
+        
+        # Prepare batch for llm_client
+        llm_input = []
+        for item in batch:
+            context = item.get("context", "")
+            original = item["template"]
+            # Encode context info
+            context_str = f"{item['object']}.{item['method']}"
+            
+            llm_input.append({
+                "source_text": original,
+                "context_tag": context_str,
+                "chunk_type": "dynamic_ui",
+            })
+            
+        try:
+            results = batch_translate_sync(llm_input)
+            
+            for orig_item, res_item in zip(batch, results):
+                translations.append({
+                    "original": orig_item["template"],
+                    "japanese": res_item.get("translation", orig_item["template"]),
+                    "regex": orig_item["regex"]
+                })
+        except Exception as e:
+            print(f"Error translating batch: {e}")
+            # Fallback
+            for item in batch:
+                translations.append({
+                    "original": item["template"],
+                    "japanese": item["template"],
+                    "regex": item["regex"]
+                })
 
     with open(output_path, "w", encoding="utf-8", newline='') as f:
         writer = csv.DictWriter(f, fieldnames=["original", "japanese", "regex"])

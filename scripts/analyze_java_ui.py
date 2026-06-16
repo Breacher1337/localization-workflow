@@ -8,8 +8,15 @@ def analyze_file(filepath):
         return []
 
     try:
-        with open(filepath, "rb") as f:
-            content = f.read().decode('utf-16')
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except UnicodeDecodeError:
+        try:
+            with open(filepath, "r", encoding="latin-1") as f:
+                content = f.read()
+        except Exception as e:
+            print(f"Error reading {filepath}: {e}")
+            return []
     except Exception as e:
         print(f"Error reading {filepath}: {e}")
         return []
@@ -59,7 +66,8 @@ def analyze_file(filepath):
                         "original_expression": expr_to_tokenize,
                         "template": template_data['template'],
                         "regex": template_data['regex'],
-                        "context": line
+                        "context": line,
+                        "file": filepath
                     })
 
     return templates
@@ -111,8 +119,22 @@ def tokenize_expression(expr):
         "regex": "^" + "".join(regex_parts) + "$"
     }
 
+def analyze_directory(dirpath):
+    all_results = []
+    for root, dirs, files in os.walk(dirpath):
+        for file in files:
+            if file.endswith(".java"):
+                filepath = os.path.join(root, file)
+                results = analyze_file(filepath)
+                if results:
+                    all_results.extend(results)
+    return all_results
+
 if __name__ == "__main__":
-    results = analyze_file("java_tools/src/button_decompiled.java")
+    target_dir = r"C:\Users\elaij\.gemini\antigravity\brain\45db05cb-76d1-4402-830d-37214631e7c1\scratch\api"
+    print(f"Scanning directory: {target_dir}")
+    results = analyze_directory(target_dir)
+    
     # Dedup by template
     unique_templates = {}
     for r in results:
