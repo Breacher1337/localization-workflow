@@ -4,72 +4,58 @@ import java.io.*;
 
 public class BroadInjector {
     public static void main(String[] args) throws Exception {
-        System.out.println("[BroadInjector] Running broad static bytecode injection...");
-        ClassPool pool = ClassPool.getDefault();
-        pool.insertClassPath("C:\\Program Files (x86)\\Acme Corp\\Application\\application-core\\legacyapp.api.jar");
-        pool.insertClassPath("C:\\Program Files (x86)\\Acme Corp\\Application\\application-core\\legacyapp_obf.jar");
-        pool.insertClassPath("build/classes"); // for JPTranslationPlugin
+        System.out.println("[BroadInjector] Running advanced broad static bytecode injection...");
 
-        ZipInputStream zip = new ZipInputStream(new FileInputStream("C:\\Program Files (x86)\\Acme Corp\\Application\\application-core\\legacyapp_obf.jar"));
+        String coreDir = System.getProperty("APPLICATION_CORE_DIR");
+        if (coreDir == null) {
+            coreDir = "."; // Default to current dir or handle as error
+        }
+
+        ClassPool pool = ClassPool.getDefault();
+        try {
+            pool.insertClassPath(new File(coreDir, "legacyapp.api.jar").getAbsolutePath());
+            pool.insertClassPath(new File(coreDir, "legacyapp_obf.jar").getAbsolutePath());
+        } catch (NotFoundException e) {
+            System.err.println("[BroadInjector] Failed to load core jars: " + e.getMessage());
+        }
+        pool.insertClassPath("build/classes");
+
+        File obfJar = new File(coreDir, "legacyapp_obf.jar");
+        if (!obfJar.exists()) {
+            System.err.println("[BroadInjector] legacyapp_obf.jar not found at " + obfJar.getAbsolutePath());
+            return;
+        }
+
+        ZipInputStream zip = new ZipInputStream(new FileInputStream(obfJar));
         ZipEntry entry;
         int injectedCount = 0;
 
         while ((entry = zip.getNextEntry()) != null) {
-            if (entry.getName().startsWith("com/fs/legacyapp/ui/") && entry.getName().endsWith(".class")) {
-                String className = entry.getName().replace("/", ".").replace(".class", "");
+            String name = entry.getName();
+            if (name.endsWith(".class") && (name.startsWith("com/fs/legacyapp/ui/") || name.startsWith("com/fs/legacyapp/api/"))) {
+                String className = name.replace("/", ".").replace(".class", "");
                 try {
-                    CtClass uiClass = pool.get(className);
+                    CtClass cc = pool.get(className);
                     boolean pluginified = false;
 
-                    // 1. Hook any method named 'setText' taking a String
-                    try {
-                        CtMethod[] methods = uiClass.getDeclaredMethods();
-                        for (CtMethod method : methods) {
-                            if (method.getName().equals("setText")) {
-                                CtClass[] params = method.getParameterTypes();
-                                for (int i = 0; i < params.length; i++) {
-                                    if (params[i].getName().equals("java.lang.String")) {
-                                        int paramIndex = i + 1; // javassist params are 1-indexed
-                                        String injectionCode = "{"
-                                                + "  if ($" + paramIndex + " != null && com.applicationjp.JPTranslationPlugin.TR.containsKey($" + paramIndex + ")) {"
-                                                + "      $" + paramIndex + " = (String) com.applicationjp.JPTranslationPlugin.TR.get($" + paramIndex + ");"
-                                                + "  }"
-                                                + "}";
-                                        method.insertBefore(injectionCode);
-                                        pluginified = true;
-                                        System.out.println("  Hooked setText param " + paramIndex + " in: " + className);
-                                    }
-                                }
+                    for (CtMethod method : cc.getDeclaredMethods()) {
+                        String mname = method.getName();
+                        if (mname.equals("setText") || mname.equals("addPara") || mname.equals("addParagraph")) {
+                            CtClass[] params = method.getParameterTypes();
+                            if (params.length > 0 && params[0].getName().equals("java.lang.String")) {
+                                method.insertBefore("{  = com.applicationjp.JPTranslationPlugin.translate(); }");
+                                pluginified = true;
                             }
                         }
-                    } catch (Exception e) {}
-
-                    // 2. Hook constructors that take a String
-                    try {
-                        for (CtConstructor constructor : uiClass.getDeclaredConstructors()) {
-                            CtClass[] params = constructor.getParameterTypes();
-                            for (int i = 0; i < params.length; i++) {
-                                if (params[i].getName().equals("java.lang.String")) {
-                                    int paramIndex = i + 1;
-                                    String injectionCode = "{"
-                                            + "  if ($" + paramIndex + " != null && com.applicationjp.JPTranslationPlugin.TR.containsKey($" + paramIndex + ")) {"
-                                            + "      $" + paramIndex + " = (String) com.applicationjp.JPTranslationPlugin.TR.get($" + paramIndex + ");"
-                                            + "  }"
-                                            + "}";
-                                    constructor.insertBefore(injectionCode);
-                                    pluginified = true;
-                                    System.out.println("  Hooked constructor param " + paramIndex + " in: " + className);
-                                }
-                            }
-                        }
-                    } catch (Exception e) {}
+                    }
 
                     if (pluginified) {
-                        uiClass.writeFile("build/classes");
+                        cc.writeFile("build/classes");
                         injectedCount++;
                     }
                 } catch (Exception e) {
-                    // System.out.println("Failed to process " + className + ": " + e.getMessage());
+                    // Log to stderr instead of silent failure
+                    // System.err.println("Failed to process class " + className + ": " + e.getMessage());
                 }
             }
         }

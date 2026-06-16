@@ -34,12 +34,12 @@ sys.stdout.reconfigure(encoding='utf-8')
 # Paths
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = r"."
-PLUGIN_ROOT = os.path.join(PROJECT_ROOT, r"plugins\JP_Lang_Pack")
+PLUGIN_ROOT = os.path.join(PROJECT_ROOT, r"plugins/JP_Lang_Pack")
 PLUGIN_DATA = os.path.join(PLUGIN_ROOT, "data")
 VANILLA_DATA = config.APPLICATION_CORE_DIR
-STATE_FILE = os.path.join(PROJECT_ROOT, r"core\state.json")
+STATE_FILE = os.path.join(PROJECT_ROOT, r"core/state.json")
 MASTERLIST = os.path.join(PROJECT_ROOT, "localization_masterlist.csv")
-PHASE2_FILE = os.path.join(PROJECT_ROOT, r"data\chunks\phase2_validated.json")
+PHASE2_FILE = os.path.join(PROJECT_ROOT, os.path.join("data", "chunks", "phase2_validated.json"))
 REPORT_FILE = os.path.join(PROJECT_ROOT, r"localization_tracking\validation_report.txt")
 
 # Placeholder regex: matches $variable, $varName, %s, %d, %f, %.2f, {name}, etc.
