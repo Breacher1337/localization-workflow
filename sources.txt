@@ -1,0 +1,2 @@
+E:\lamesa\2026\legacy-java-localization-workflow\source\com\applicationjp\AgentMain.java
+E:\lamesa\2026\legacy-java-localization-workflow\source\com\applicationjp\JPTranslationPlugin.java

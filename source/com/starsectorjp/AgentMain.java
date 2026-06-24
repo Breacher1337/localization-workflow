@@ -16,26 +16,50 @@ public class AgentMain {
                 // Target UI rendering classes
                 if (className.startsWith("com/fs/legacyapp/ui/") ||
                     className.equals("com/fs/legacyapp/api/util/Misc") ||
-                    className.equals("com/fs/legacyapp/api/impl/campaign/intel/MessageIntel")) {
+                    className.equals("com/fs/legacyapp/api/impl/campaign/intel/MessageIntel") ||
+                    className.equals("com/fs/legacyapp/api/impl/campaign/CoreRuleTokenReplacementGeneratorImpl")) {
 
                     try {
                         ClassPool cp = ClassPool.getDefault();
                         CtClass cc = cp.makeClass(new java.io.ByteArrayInputStream(classfileBuffer));
                         boolean pluginified = false;
 
-                        for (CtMethod method : cc.getDeclaredMethods()) {
-                            // Intercept setText, addPara, addParagraph, etc.
-                            if (method.getName().equals("setText") ||
-                                method.getName().equals("addPara") ||
-                                method.getName().equals("addParagraph")) {
+                        if (className.equals("com/fs/legacyapp/api/impl/campaign/CoreRuleTokenReplacementGeneratorImpl")) {
+                            for (CtMethod method : cc.getDeclaredMethods()) {
+                                if (method.getName().equals("getTokenReplacements")) {
+                                    method.insertAfter(
+                                        "{" +
+                                        "  java.util.Iterator it = $_.entrySet().iterator();" +
+                                        "  while (it.hasNext()) {" +
+                                        "    java.util.Map.Entry entry = (java.util.Map.Entry) it.next();" +
+                                        "    String val = (String) entry.getValue();" +
+                                        "    if (val != null) {" +
+                                        "      String trans = com.applicationjp.JPTranslationPlugin.translate(val);" +
+                                        "      if (trans != null && !trans.equals(val)) {" +
+                                        "        entry.setValue(trans);" +
+                                        "      }" +
+                                        "    }" +
+                                        "  }" +
+                                        "}"
+                                    );
+                                    pluginified = true;
+                                }
+                            }
+                        } else {
+                            for (CtMethod method : cc.getDeclaredMethods()) {
+                                // Intercept setText, addPara, addParagraph, etc.
+                                if (method.getName().equals("setText") ||
+                                    method.getName().equals("addPara") ||
+                                    method.getName().equals("addParagraph")) {
 
-                                try {
-                                    CtClass[] params = method.getParameterTypes();
-                                    if (params.length > 0 && params[0].getName().equals("java.lang.String")) {
-                                        method.insertBefore("{  = com.applicationjp.JPTranslationPlugin.translate(); }");
-                                        pluginified = true;
-                                    }
-                                } catch (NotFoundException e) {}
+                                    try {
+                                        CtClass[] params = method.getParameterTypes();
+                                        if (params.length > 0 && params[0].getName().equals("java.lang.String")) {
+                                            method.insertBefore("{ $1 = com.applicationjp.JPTranslationPlugin.translate($1); }");
+                                            pluginified = true;
+                                        }
+                                    } catch (NotFoundException e) {}
+                                }
                             }
                         }
 

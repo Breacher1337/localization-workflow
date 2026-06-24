@@ -27,33 +27,38 @@ PLACEHOLDER_RE = re.compile(
 
 def mask_glossary(chunk):
     text = chunk["source_text"]
-    glossary_hits = chunk.get("glossary_hits", [])
-    if not glossary_hits:
-        chunk["masked_text"] = text
-        chunk["placeholders"] = {}
-        return
-        
-    sorted_hits = sorted(glossary_hits, key=lambda x: len(x.get("english", "")), reverse=True)
-    
     placeholders = {}
-    masked_text = text
-    
-    for idx, hit in enumerate(sorted_hits):
-        eng = hit.get("english", "").strip()
-        jp = hit.get("japanese", "").strip()
-        if not eng or not jp:
-            continue
-        placeholder = f"__G{idx}__"
-        placeholders[placeholder] = jp
-        
-        pattern = re.compile(re.escape(eng), re.IGNORECASE)
-        masked_text = pattern.sub(placeholder, masked_text)
-        
-    chunk["masked_text"] = masked_text
+    ph_idx = 0
+
+    # 1. Protect variables/formatting using PLACEHOLDER_RE
+    vars_found = list(set(PLACEHOLDER_RE.findall(text)))
+    vars_found.sort(key=len, reverse=True)
+    for v in vars_found:
+        ph = f"__PHVAR{ph_idx}__"
+        placeholders[ph] = v
+        text = text.replace(v, ph)
+        ph_idx += 1
+
+    # 2. Mask glossary terms
+    glossary_hits = chunk.get("glossary_hits", [])
+    if glossary_hits:
+        sorted_hits = sorted(glossary_hits, key=lambda x: len(x.get("english", "")), reverse=True)
+        for idx, hit in enumerate(sorted_hits):
+            eng = hit.get("english", "").strip()
+            jp = hit.get("japanese", "").strip()
+            if not eng or not jp:
+                continue
+            placeholder = f"__G{idx}__"
+            placeholders[placeholder] = jp
+            
+            pattern = re.compile(re.escape(eng), re.IGNORECASE)
+            text = pattern.sub(placeholder, text)
+
+    chunk["masked_text"] = text
     chunk["placeholders"] = placeholders
     # Override source_text for LLM so it reads the masked text
     chunk["original_source"] = chunk["source_text"]
-    chunk["source_text"] = masked_text
+    chunk["source_text"] = text
 
 def unmask_glossary(chunk):
     translated = chunk.get("translation", "")
@@ -63,12 +68,20 @@ def unmask_glossary(chunk):
     placeholders = chunk.get("placeholders", {})
     
     if isinstance(placeholders, dict):
+        # First restore glossary terms (they start with __G)
         for placeholder, jp_val in placeholders.items():
-            num = placeholder.strip("_G")
-            pattern_str = rf"__\s*[gG]\s*{num}\s*__"
-            val_str = str(jp_val) if jp_val is not None else ""
-            translated = re.sub(pattern_str, val_str, translated)
-            
+            if placeholder.startswith("__G"):
+                num = placeholder.strip("_G")
+                pattern_str = rf"__\s*[gG]\s*{num}\s*__"
+                val_str = str(jp_val) if jp_val is not None else ""
+                translated = re.sub(pattern_str, val_str, translated)
+                
+        # Next restore variables/formatting
+        for placeholder, orig in placeholders.items():
+            if not placeholder.startswith("__G"):
+                translated = translated.replace(placeholder, orig)
+                translated = translated.replace(f" {placeholder} ", orig).replace(f"{placeholder} ", orig).replace(f" {placeholder}", orig)
+                
     chunk["translation"] = translated
     # Restore original source_text
     if "original_source" in chunk:

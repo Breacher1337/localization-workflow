@@ -32,7 +32,7 @@ from google.genai import types
 # Initialize Gemma 4 API Client
 API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=API_KEY) if API_KEY else None
-PLUGINEL_NAME = "gemma-4-26b-a4b-it"
+PLUGINEL_NAME = "gemini-2.5-flash"
 RATE_LIMIT_DELAY = 4.5
 
 # Load glossary

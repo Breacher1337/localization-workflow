@@ -27,8 +27,8 @@ load_env()
 API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=API_KEY) if API_KEY else None
 
-# Use Gemma 4 for all translations (15 RPM limit)
-PLUGINEL_NAME = "gemma-4-26b-a4b-it"
+# Use Gemini 2.5 Flash for all translations (15 RPM limit)
+PLUGINEL_NAME = "gemini-2.5-flash"
 RATE_LIMIT_DELAY = 4.5  # Seconds to wait between batches (15 RPM = 4 seconds, so 4.5 is safe)
 
 class QuotaExhaustedError(Exception):
